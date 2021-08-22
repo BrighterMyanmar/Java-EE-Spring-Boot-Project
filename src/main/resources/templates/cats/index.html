@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div class="container my-5">
+    <h1 class="text-center text-info">All Categories</h1>
+    <div class="col-md-8 offset-md-2">
+        <a href="/cats/create" class="btn btn-sm btn-primary mb-2">Create <i class="fas fa-plus"></i> </a>
+        <table class="table table-bordered">
+            <thead>
+            <tr class="bg-dark text-white">
+                <th>No</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Food</td>
+                <td><img th:src="@{/imgs/bm.png}" alt="BM PNG" width="50px"></td>
+                <td>
+                    <a href="/cats/edit/1" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Beverage</td>
+                <td><img th:src="@{/imgs/java.png}" alt="BM PNG" width="50px"></td>
+                <td>
+                    <a href="/cats/edit/2" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div th:replace="fragments :: foot">
+</div>
+</body>
+</html>
