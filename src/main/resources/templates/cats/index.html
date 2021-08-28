@@ -17,32 +17,21 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Food</td>
-                <td><img th:src="@{/imgs/bm.png}" alt="BM PNG" width="50px"></td>
+
+            <tr th:each="cat : ${cats}">
+                <td th:text="${cat.id}"></td>
+                <td th:text="${cat.name}"></td>
+                <td><img th:src="@{'/uploads/'+${cat.image}}" alt="BM PNG" width="50px"></td>
                 <td>
                     <a href="/cats/edit/1" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <button class="btn btn-danger btn-sm">
+                    <a th:href="@{'/cats/delete/'+${cat.id}}" class="btn btn-danger btn-sm">
                         <i class="fas fa-trash"></i>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Beverage</td>
-                <td><img th:src="@{/imgs/java.png}" alt="BM PNG" width="50px"></td>
-                <td>
-                    <a href="/cats/edit/2" class="btn btn-warning btn-sm">
-                        <i class="fas fa-edit"></i>
                     </a>
-                    <button class="btn btn-danger btn-sm">
-                        <i class="fas fa-trash"></i>
-                    </button>
                 </td>
             </tr>
+
             </tbody>
         </table>
     </div>

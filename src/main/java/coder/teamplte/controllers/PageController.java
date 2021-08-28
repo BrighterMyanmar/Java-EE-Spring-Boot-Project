@@ -1,4 +1,7 @@
 package coder.teamplte.controllers;
+import coder.teamplte.models.Category;
+import coder.teamplte.models.daos.CategoryDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -15,8 +18,12 @@ import java.nio.file.Paths;
 public class PageController {
     static String UPLOAD_FOLDER = "src/main/resources/static/uploads/";
 
+    @Autowired
+    CategoryDao categoryDao;
+
     @GetMapping
-    public String index(){
+    public String index(Model model){
+        model.addAttribute("cats",categoryDao.findAll());
         return "cats/index";
     }
 
@@ -28,6 +35,8 @@ public class PageController {
     @PostMapping(value="/store")
     public String store(MultipartFile file, @RequestParam String name){
        String filename =  saveFile(file);
+       Category cat = new Category(name,filename);
+       categoryDao.save(cat);
        return "redirect:";
     }
 
@@ -41,6 +50,13 @@ public class PageController {
 
     @PostMapping(value="/update/{id}")
     public String update(@PathVariable int id,@RequestParam String name){
+        return "redirect:/cats";
+    }
+
+    @GetMapping(value="/delete/{id}")
+    public String delete(@PathVariable int id){
+        Category cat = categoryDao.findById(id).orElse(null);
+        categoryDao.delete(cat);
         return "redirect:/cats";
     }
 
