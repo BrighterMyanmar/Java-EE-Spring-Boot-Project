@@ -6,13 +6,13 @@
 <div class="container my-5">
     <h1 class="text-center text-info">Edit Category id <span th:text="${id}"></span></h1>
     <div class="col-md-6 offset-md-3">
-        <form method="post" action="/cats/update/1" enctype="multipart/form-data">
+        <form method="post" th:action="@{'/cats/update/'+${cat.id}}" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name"
-                       name="name" th:value="${name}">
+                       name="name" th:value="${cat.name}">
             </div>
-            <img th:src="@{/imgs/java.png}"  alt="" width="50px">
+            <img th:src="@{'/uploads/'+${cat.image}}"  alt="" width="50px">
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input class="form-control" type="file" id="image" name="file">

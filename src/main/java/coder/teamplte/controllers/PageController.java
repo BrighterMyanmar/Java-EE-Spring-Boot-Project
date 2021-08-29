@@ -42,21 +42,18 @@ public class PageController {
 
     @GetMapping(value="/edit/{id}")
     public String edit(Model model,@PathVariable int id){
-        model.addAttribute("id",id);
-        model.addAttribute("name","Food");
-        model.addAttribute("image","image");
+        model.addAttribute("cat",categoryDao.findById(id).orElse(null));
         return "cats/edit";
     }
 
     @PostMapping(value="/update/{id}")
-    public String update(@PathVariable int id,@RequestParam String name){
-        return "redirect:/cats";
-    }
-
-    @GetMapping(value="/delete/{id}")
-    public String delete(@PathVariable int id){
+    public String update(@PathVariable int id,@RequestParam("file") MultipartFile file,@RequestParam String name){
         Category cat = categoryDao.findById(id).orElse(null);
-        categoryDao.delete(cat);
+        if(file.getSize() > 0){
+            cat.setImage(saveFile(file));
+        }
+        cat.setName(name);
+        categoryDao.save(cat);
         return "redirect:/cats";
     }
 
