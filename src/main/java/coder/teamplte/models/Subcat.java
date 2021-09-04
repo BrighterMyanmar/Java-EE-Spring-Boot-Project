@@ -1,24 +1,24 @@
 package coder.teamplte.models;
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Category {
+public class Subcat {
     @Id
     @GeneratedValue
     int id;
 
-    String name;
-    String image;
+    String name,image;
 
-    @OneToMany
-    @JoinColumn(name="category_id")
-    private List<Subcat> subcats = new ArrayList<>();
+    @OneToOne
+    Category category;
 
-    public Category(){} // Hibernate
+    public Subcat() { }
 
-    public Category(String name, String image) {
+    public Subcat(String name, String image) {
         this.name = name;
         this.image = image;
     }
@@ -47,17 +47,17 @@ public class Category {
         this.image = image;
     }
 
-    public List<Subcat> getSubcats() {
-        return subcats;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setSubcats(List<Subcat> subcats) {
-        this.subcats = subcats;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
     public String toString() {
-        return "Category{" +
+        return "Subcat{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
