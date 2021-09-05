@@ -2,27 +2,30 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-
+<div th:replace="fragments :: nav"></div>
 <div class="container my-5">
     <h1 class="text-center text-info">Create New Sub Category</h1>
     <div class="col-md-6 offset-md-3">
-        <form method="post" action="/subcats/store" enctype="multipart/form-data">
+        <form method="post" th:action="@{'/subcats/update/'+${subcat.id}}" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" th:value="${subcat.name}">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Parent Name</label>
-                <select class="form-select" name="category">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
+                <select class="form-select" name="category_id">
+                    <option
+                            th:each="cat : ${cats}"
+                            th:selected="${cat.id} == ${subcat.category.id}"
+                            th:value="${cat.id}">
+                        <span th:text="${cat.name}"></span></option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="image" class="form-label">Image</label>
                 <input class="form-control" type="file" id="image" name="file">
             </div>
-            <button type="submit" class="btn btn-primary btn-sm float-end">Create</button>
+            <button type="submit" class="btn btn-primary btn-sm float-end">Update</button>
         </form>
     </div>
 </div>

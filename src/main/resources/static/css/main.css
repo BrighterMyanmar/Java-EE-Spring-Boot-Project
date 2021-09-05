@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@200&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400;0,500;0,600;1,700&family=Source+Sans+Pro:ital,wght@0,200;0,400;1,200;1,300&display=swap');
 *{
-    font-family: Urbanist;
-    font-weight: bold;
+    font-family: "Source Sans Pro";
+    /*font-weight: bold;*/
 }

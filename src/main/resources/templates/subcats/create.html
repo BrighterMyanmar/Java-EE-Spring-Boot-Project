@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head th:replace="fragments :: head"></head>
 <body>
-
+<div th:replace="fragments :: nav"></div>
 <div class="container my-5">
     <h1 class="text-center text-info">Create New Sub Category</h1>
     <div class="col-md-6 offset-md-3">
@@ -12,10 +12,9 @@
                 <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="mb-3">
-                <label for="name" class="form-label">Parent Name</label>
-                <select class="form-select" name="category">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
+                <label for="name" class="form-label">Category Name</label>
+                <select class="form-select" name="category_id">
+                    <option th:each="cat : ${cats}" th:value="${cat.id}"><span th:text="${cat.name}"></span></option>
                 </select>
             </div>
             <div class="mb-3">
