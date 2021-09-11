@@ -2,6 +2,8 @@ package coder.teamplte.controllers;
 
 import coder.teamplte.models.Tag;
 import coder.teamplte.models.daos.TagDao;
+import coder.teamplte.services.ImageUploadService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,49 +21,30 @@ import java.nio.file.Paths;
 @Controller
 @RequestMapping("/tags")
 public class TagController {
-    @Autowired
-    TagDao tagDao;
-    static String UPLOAD_FOLDER = "src/main/resources/static/uploads/";
+   @Autowired
+   TagDao tagDao;
+   @Autowired
+   ImageUploadService imageUploadService;
 
-    @GetMapping
-    public String index(Model model){
-        model.addAttribute("tags",tagDao.findAll());
-        return "tag/index";
-    }
+   @GetMapping
+   public String index(Model model) {
+      model.addAttribute("tags", tagDao.findAll());
+      return "tag/index";
+   }
 
-    @GetMapping(value="/create")
-    public String create(){
-        return "tag/create";
-    }
+   @GetMapping(value = "/create")
+   public String create() {
+      return "tag/create";
+   }
 
-    @PostMapping(value="/store")
-    public String store(@RequestParam("files")MultipartFile[] files,@RequestParam String name){
-        String filenames = saveMultipleFIle(files);
-        Tag tag = new Tag();
-        tag.setName(name);
-        tag.setImages(filenames);
-        tagDao.save(tag);
-        return "redirect:";
-    }
-
-    public String saveMultipleFIle(MultipartFile[] files){
-         String filenames = "";
-         for(MultipartFile file : files){
-             filenames += "," + saveFile(file);
-         }
-         return filenames.substring(1);
-    }
-
-    public String saveFile(MultipartFile file){
-        String filename = file.getOriginalFilename();
-        try{
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOAD_FOLDER + filename);
-            Files.write(path,bytes);
-        }catch(IOException e){
-            System.out.println("File Write Error");
-        }
-        return filename;
-    }
+   @PostMapping(value = "/store")
+   public String store(@RequestParam("files") MultipartFile[] files, @RequestParam String name) {
+      String filenames = imageUploadService.saveMultipleFIle(files);
+      Tag tag = new Tag();
+      tag.setName(name);
+      tag.setImages(filenames);
+      tagDao.save(tag);
+      return "redirect:";
+   }
 
 }

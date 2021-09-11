@@ -1,72 +1,59 @@
 package coder.teamplte.controllers;
+
 import coder.teamplte.models.Category;
 import coder.teamplte.models.daos.CategoryDao;
+import coder.teamplte.services.ImageUploadService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 @Controller
 @RequestMapping("/cats")
 public class CategoryController {
-    static String UPLOAD_FOLDER = "src/main/resources/static/uploads/";
 
-    @Autowired
-    CategoryDao categoryDao;
+   @Autowired
+   ImageUploadService imageUploadService;
 
-    @GetMapping
-    public String index(Model model){
-        model.addAttribute("cats",categoryDao.findAll());
-        return "cats/index";
-    }
+   @Autowired
+   CategoryDao categoryDao;
 
-    @GetMapping(value="/create")
-    public String create(){
-        return "cats/create";
-    }
+   @GetMapping
+   public String index(Model model) {
+      model.addAttribute("cats", categoryDao.findAll());
+      return "cats/index";
+   }
 
-    @PostMapping(value="/store")
-    public String store(MultipartFile file, @RequestParam String name){
-       String filename =  saveFile(file);
-       Category cat = new Category(name,filename);
-       categoryDao.save(cat);
-       return "redirect:";
-    }
+   @GetMapping(value = "/create")
+   public String create() {
+      return "cats/create";
+   }
 
-    @GetMapping(value="/edit/{id}")
-    public String edit(Model model,@PathVariable int id){
-        model.addAttribute("cat",categoryDao.findById(id).orElse(null));
-        return "cats/edit";
-    }
+   @PostMapping(value = "/store")
+   public String store(MultipartFile file, @RequestParam String name) {
+      String filename = imageUploadService.saveFile(file);
+      Category cat = new Category(name, filename);
+      categoryDao.save(cat);
+      return "redirect:";
+   }
 
-    @PostMapping(value="/update/{id}")
-    public String update(@PathVariable int id,@RequestParam("file") MultipartFile file,@RequestParam String name){
-        Category cat = categoryDao.findById(id).orElse(null);
-        if(file.getSize() > 0){
-            cat.setImage(saveFile(file));
-        }
-        cat.setName(name);
-        categoryDao.save(cat);
-        return "redirect:/cats";
-    }
+   @GetMapping(value = "/edit/{id}")
+   public String edit(Model model, @PathVariable int id) {
+      model.addAttribute("cat", categoryDao.findById(id).orElse(null));
+      return "cats/edit";
+   }
 
-    public String saveFile(MultipartFile file){
-        String filename = file.getOriginalFilename();
-        try{
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOAD_FOLDER + filename);
-            Files.write(path,bytes);
-        }catch(IOException e){
-            System.out.println("File Write Error");
-        }
-        return filename;
-    }
+   @PostMapping(value = "/update/{id}")
+   public String update(@PathVariable int id, @RequestParam("file") MultipartFile file, @RequestParam String name) {
+      Category cat = categoryDao.findById(id).orElse(null);
+      if (file.getSize() > 0) {
+         cat.setImage(imageUploadService.saveFile(file));
+      }
+      cat.setName(name);
+      categoryDao.save(cat);
+      return "redirect:/cats";
+   }
 
 }

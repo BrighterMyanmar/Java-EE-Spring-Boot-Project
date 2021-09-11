@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+   <div th:replace="fragments :: nav"></div>
+   <div class="container my-5">
+      <h1 class="text-center text-info">All Child Categories</h1>
+      <div class="col-md-8 offset-md-2">
+         <div th:if="${message}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+               <strong th:text="${message}"></strong>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+         </div>
+         <a href="/childcats/create" class="btn btn-sm btn-primary mb-2">Create <i class="fas fa-plus"></i> </a>
+         <table class="table table-bordered">
+            <thead>
+               <tr class="bg-dark text-white">
+                  <th>No</th>
+                  <th>Name</th>
+                  <th>Parent</th>
+                  <th>Image</th>
+                  <th>Action</th>
+               </tr>
+            </thead>
+            <tbody>
+
+               <tr th:each="childcat : ${childcats}">
+                  <td th:text="${childcat.id}"></td>
+                  <td th:text="${childcat.name}"></td>
+                  <td th:text="${childcat.subcat.name}"></td>
+                  <td><img th:src="@{'/uploads/'+${childcat.image}}" alt="BM PNG" width="50px"></td>
+                  <td>
+                     <a th:href="@{'/childcats/edit/'+${childcat.id}}" class="btn btn-warning btn-sm">
+                        <i class="fas fa-edit"></i>
+                     </a>
+                     <a th:href="@{'/childcats/delete/'+${childcat.id}}" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i>
+                     </a>
+                  </td>
+               </tr>
+
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+
+
+   <div th:replace="fragments :: foot"></div>
+</body>
+
+</html>
