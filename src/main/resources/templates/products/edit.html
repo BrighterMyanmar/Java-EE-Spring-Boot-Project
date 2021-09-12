@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+   <div th:replace="fragments :: nav"></div>
+   <div class="container my-5">
+      <h1 class="text-center text-info">Edit Product</h1>
+      <div class="col-md-6 offset-md-3">
+         <form method="post" th:action="@{'/products/update/' + ${product.id}}" enctype="multipart/form-data">
+            <div class="mb-3">
+               <label for="name" class="form-label">Name</label>
+               <input type="text" class="form-control" id="name" name="name" th:value="${product.name}">
+            </div>
+            <div class="mb-3">
+               <label for="brand" class="form-label">Brand</label>
+               <input type="text" class="form-control" id="brand" name="brand" th:value="${product.brand}">
+            </div>
+            <div class="mb-3">
+               <label for="price" class="form-label">Price</label>
+               <input type="number" class="form-control" id="price" name="price" th:value="${product.price}">
+            </div>
+            <div class="mb-3">
+               <label for="childcat_id" class="form-label">Child Category Name</label>
+               <select class="form-select" name="childcat_id">
+                  <option th:each="childcat : ${childcats}" th:selected="${product.childcat.id} == ${childcat.id}"
+                     th:value="${childcat.id}"><span th:text="${childcat.name}"></span></option>
+               </select>
+            </div>
+            <span th:each="image : ${product.images.split(',')}">
+               <img th:src="@{'/uploads/' + ${image}}" width="50px">
+            </span>
+            <div class="mb-3">
+               <label for="images" class="form-label">Image</label>
+               <input class="form-control" type="file" id="images" name="files" multiple>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm float-end">Update</button>
+         </form>
+      </div>
+   </div>
+
+
+   <div th:replace="fragments :: foot"></div>
+</body>
+
+</html>

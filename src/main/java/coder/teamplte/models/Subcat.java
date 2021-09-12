@@ -12,64 +12,65 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Subcat {
-    @Id
-    @GeneratedValue
-    int id;
+   @Id
+   @GeneratedValue
+   int id;
 
-    String name,image;
+   String name, image;
 
-    @OneToOne
-    Category category;
+   @OneToOne
+   Category category;
 
-    @OneToMany
-    @JoinColumn(name="subcat_id")
-    private List<Childcat> childcats = new ArrayList<>();
+   @OneToMany
+   @JoinColumn(name = "subcat_id")
+   private List<Childcat> childcats = new ArrayList<>();
 
-    public Subcat() { }
+   @OneToMany
+   @JoinColumn(name = "subcat_id")
+   private List<Product> products = new ArrayList<>();
 
-    public Subcat(String name, String image) {
-        this.name = name;
-        this.image = image;
-    }
+   public Subcat() {
+   }
 
-    public int getId() {
-        return id;
-    }
+   public Subcat(String name, String image) {
+      this.name = name;
+      this.image = image;
+   }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+   public int getId() {
+      return id;
+   }
 
-    public String getName() {
-        return name;
-    }
+   public void setId(int id) {
+      this.id = id;
+   }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+   public String getName() {
+      return name;
+   }
 
-    public String getImage() {
-        return image;
-    }
+   public void setName(String name) {
+      this.name = name;
+   }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+   public String getImage() {
+      return image;
+   }
 
-    public Category getCategory() {
-        return category;
-    }
+   public void setImage(String image) {
+      this.image = image;
+   }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+   public Category getCategory() {
+      return category;
+   }
 
-    @Override
-    public String toString() {
-        return "Subcat{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
-                '}';
-    }
+   public void setCategory(Category category) {
+      this.category = category;
+   }
+
+   @Override
+   public String toString() {
+      return "Subcat{" + "id=" + id + ", name='" + name + '\'' + ", image='" + image + '\'' + '}';
+   }
 }

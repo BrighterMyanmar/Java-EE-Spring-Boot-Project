@@ -1,6 +1,10 @@
 package coder.teamplte.models;
 
 import javax.persistence.Entity;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,6 +17,10 @@ public class Childcat {
 
    @ManyToOne
    Subcat subcat;
+
+   @OneToMany
+   @JoinColumn(name = "childcat_id")
+   private List<Product> products = new ArrayList<>();
 
    public Childcat() {
    };
@@ -56,12 +64,8 @@ public class Childcat {
    }
 
    @Override
-    public String toString() {
-        return "ChildCat{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
-                '}';
-    }
+   public String toString() {
+      return "ChildCat{" + "id=" + id + ", name='" + name + '\'' + ", image='" + image + '\'' + '}';
+   }
 
 }
