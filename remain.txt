@@ -1,0 +1,54 @@
+1. Full Development System Concept 
+2. Request Validation / Model Validation
+3. User Authentication System ( Login, Register, Logout, Role , Permission )
+4. Api Exporting ( Front End, Android, iOS, Browser ( AungularJS, ReactJs))
+5. Publishing 
+
+Full Development System Concept
+ 1. Model 
+ 2. Repository ( Data Access Object )
+ 3. Dto ( Data Transfer Object )
+ 4. Services ( Junior / Senior )
+ 5. Services Implementation 
+ 6. Controllers ( Junior Dev )
+ 7. Thymeleaf ( Junior Dve )
+
+ Web Company 
+ Cusomer Gaols ->
+ Project Manage -> Database Design 
+
+ UI/UX ->  Web Design
+   -> Site Mapping ( Sitemap )
+   -> Sketching
+   -> Low Fidility Wireframing ( Wireframing Tool - figama )
+   -> Layout Wireframing ( AdobeXD)
+   -> Mocking Up  ( Adobe XD -> Data Consistancy )
+   -> Prototyping ( functionalities )
+ From End Dev Designer ->
+   -> HTML CSS JavaScript 
+
+ Backend Development -> 
+   -> Senior Developer 
+      1. Model 
+      2. Repository ( Data Access Object )
+      3. Dto ( Data Transfer Object )
+      4. Services ( Junior / Senior )
+      5. Services Implementation 
+
+   -> Junior Developer 
+      6. Controllers ( Junior Dev )
+      7. Thymeleaf ( Junior Dve )
+
+Code Design ( Tag ) 
+   1. Model 
+   2. TagRepository ( DAO )
+   3. DTO ( Data Transfer Object )
+   4. Services ( Interface ) 
+   5. Service Impl
+
+   6. Controller 
+   7. Thymeleaf
+
+
+
+

@@ -2,54 +2,52 @@ package coder.teamplte.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Tag {
 
-    @Id
-    @GeneratedValue
-    int id;
+   @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   int id;
+   String name;
+   String image;
 
-    String name,images;
+   public Tag() {
+   };
 
-    public Tag() {}
+   public Tag(String name, String image) {
+      this.name = name;
+      this.image = image;
+   }
 
-    public Tag(String name, String images) {
-        this.name = name;
-        this.images = images;
-    }
+   public int getId() {
+      return this.id;
+   }
 
-    public int getId() {
-        return id;
-    }
+   public void setId(int id) {
+      this.id = id;
+   }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+   public String getName() {
+      return this.name;
+   }
 
-    public String getName() {
-        return name;
-    }
+   public void setName(String name) {
+      this.name = name;
+   }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+   public String getImage() {
+      return this.image;
+   }
 
-    public String getImages() {
-        return images;
-    }
+   public void setImage(String image) {
+      this.image = image;
+   }
 
-    public void setImages(String images) {
-        this.images = images;
-    }
+   public String toString() {
+      return "Id : " + this.id + " Name : " + this.name + " Image : " + this.image;
+   }
 
-    @Override
-    public String toString() {
-        return "Tag{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", images='" + images + '\'' +
-                '}';
-    }
 }
