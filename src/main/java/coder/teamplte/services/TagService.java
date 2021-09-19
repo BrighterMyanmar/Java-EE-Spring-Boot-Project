@@ -10,6 +10,8 @@ import coder.teamplte.models.Tag;
 @Service
 public interface TagService {
    Tag save(TagDto tagDto);
-
+   Tag findById(int id);
    List<Tag> all();
+   Tag update(Tag tag);
+   void delete(Tag tag);
 }

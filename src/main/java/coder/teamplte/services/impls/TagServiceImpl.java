@@ -31,4 +31,19 @@ public class TagServiceImpl implements TagService {
       return tagRepository.findAll();
    }
 
+   @Override
+   public Tag findById(int id) {
+      return tagRepository.findById(id).orElse(null);
+   }
+
+   @Override
+   public Tag update(Tag tag) {
+      return tagRepository.save(tag);
+   }
+
+   @Override
+   public void delete(Tag tag) {
+      tagRepository.delete(tag);
+   }
+
 }
