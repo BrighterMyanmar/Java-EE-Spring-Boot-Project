@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+   <div th:replace="fragments :: nav"></div>
+   <div class="container my-5">
+      <h1 class="text-center text-info">User Register</h1>
+      <div class="col-md-6 offset-md-3">
+         <form method="post" th:action="@{/register}" th:object="${user}" enctype="multipart/form-data">
+            <div class="mb-3">
+               <label for="name" class="form-label">Name</label>
+               <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+            </div>
+            <div class="mb-3">
+               <label for="email" class="form-label">Email</label>
+               <input type="email" class="form-control" id="email" name="email" th:field="*{email}">
+            </div>
+            <div class="mb-3">
+               <label for="phone" class="form-label">Phone</label>
+               <input type="tel" class="form-control" id="phone" name="phone" th:field="*{phone}">
+            </div>
+            <div class="mb-3">
+               <label for="password" class="form-label">Password</label>
+               <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+            </div>
+            <a href="/login">Already Member! Login here!</a>
+            <button type="submit" class="btn btn-primary btn-sm float-end">Register</button>
+         </form>
+      </div>
+   </div>
+
+   <div th:replace="fragments :: foot"></div>
+</body>
+
+</html>

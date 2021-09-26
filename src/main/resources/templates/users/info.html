@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head th:replace="fragments :: head"></head>
+
+<body>
+   <div th:replace="fragments :: nav"></div>
+
+   <div class="container my-5">
+      <h1>User Info Page</h1>
+      <button class="btn btn-primary btn-lg" sec:authorize="hasRole('ADMIN')">
+         ADMIN Role
+      </button>
+      <button class="btn btn-primary btn-lg" sec:authorize="hasRole('USER')">
+         USER Role
+      </button>
+      <br><br>
+      <form th:action="@{/order}" method="post">
+         <input type="hidden" name="orders" value="" id="orderVal" />
+         <button class="btn btn-primary btn-sm">Order Upload</button>
+      </form>
+      <br><br>
+      <div sec:authentication="name"></div>
+   </div>
+
+   <div th:replace="fragments :: foot"></div>
+
+   <script>
+      document.getElementById("orderVal").value = "1:2,2:5,3:10";
+   </script>
+</body>
+
+</html>

@@ -49,6 +49,26 @@ Code Design ( Tag )
    6. Controller 
    7. Thymeleaf
 
+   Tables 
+
+Steps 
+-> Database Properties
+-> Role -> ManyToMany
+-> User -> ManyToMany ( Pivot Table )
+-> UserRepository
+-> RoleRepository
+-> UserDto 
+-> UserService
+-> Service Implementation Class 
+
+users_role 
+   user_id 
+   role_id
+
+
+   
+
+
 
 
 

@@ -30,9 +30,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                     <a class="nav-link text-white" href="/products">Products</a>
-                  </li>
+                  <div sec:authorize="isAuthenticated()">
+                     <li class="nav-item">
+                        <a class="nav-link text-white" href="/info">
+                           <i class="fa fa-user pr-2"></i><span sec:authentication="name"></span>
+                        </a>
+                     </li>
+                  </div>
                   <li class="nav-item dropdown">
                      <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,6 +47,16 @@
                         <li><a class="dropdown-item" href="/subcats">Sub Cats</a></li>
                         <li><a class="dropdown-item" href="/childcats">Child Cats</a></li>
                         <li><a class="dropdown-item" href="/tags">Tags</a></li>
+                        <li>
+                           <hr class="dropdown-divider">
+                        </li>
+                        <div sec:authorize="isAuthenticated()">
+                           <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </div>
+                        <div sec:authorize="!isAuthenticated()">
+                           <li><a class="dropdown-item" href="/login">Login</a></li>
+                           <li><a class="dropdown-item" href="/register">Register</a></li>
+                        </div>
                      </ul>
                   </li>
                </ul>
